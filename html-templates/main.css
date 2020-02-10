@@ -1,0 +1,583 @@
+body {
+  font-family: "Public Sans", sans-serif;
+}
+
+.header-bar {
+  background-color: #292929;
+}
+
+.container--narrow {
+  max-width: 732px;
+}
+
+.header-search-icon {
+  position: relative;
+  top: 3px;
+}
+
+.header-chat-icon {
+  cursor: pointer;
+  position: relative;
+  top: 3px;
+}
+
+.chat-count-badge {
+  text-align: center;
+  position: absolute;
+  top: 2px;
+  left: 0px;
+  width: 16px;
+  font-size: 0.6rem;
+  font-weight: bold;
+}
+
+.avatar-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  margin-right: 5px;
+  position: relative;
+  top: -3px;
+}
+
+.avatar-tiny {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  margin-right: 4px;
+  position: relative;
+  top: -1px;
+}
+
+.form-control-title {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.body-content {
+  font-size: 1.2rem;
+  line-height: 1.75;
+  color: #292929;
+}
+
+.body-content p,
+.body-content ul,
+.body-content ol {
+  margin-bottom: 1.75rem;
+}
+
+.input-dark {
+  background-color: #444;
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.input-dark:focus {
+  color: #ffffff;
+  background-color: #555;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-dark::-webkit-input-placeholder {
+  color: #888;
+}
+.input-dark::-moz-placeholder {
+  color: #888;
+}
+.input-dark:-ms-input-placeholder {
+  color: #888;
+}
+.input-dark:-moz-placeholder {
+  color: #888;
+}
+
+@media (min-width: 768px) {
+  .input-dark {
+    width: auto;
+  }
+}
+
+.display-3 {
+  font-size: 4.2rem;
+}
+
+@media (max-width: 1199px) {
+  .display-3 {
+    font-size: 3.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .display-3 {
+    font-size: 2.5rem;
+  }
+}
+
+.form-group {
+  position: relative;
+}
+
+.liveValidateMessage {
+  top: -6px;
+  position: absolute;
+  z-index: 1;
+  padding-top: 6px;
+  padding-bottom: 16px;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+.liveValidateMessage--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.liveValidateMessage-enter {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.liveValidateMessage-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: 0.33s opacity ease-in-out, 0.33s transform ease-in-out;
+}
+
+.liveValidateMessage-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.liveValidateMessage-exit-active {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: 0.33s opacity ease-in-out, 0.33s transform ease-in-out;
+}
+
+.form-group input,
+.form-group textarea {
+  position: relative;
+  z-index: 2;
+}
+
+textarea.tall-textarea {
+  height: 160px;
+}
+
+@media (min-width: 768px) {
+  textarea.tall-textarea {
+    height: 320px;
+  }
+}
+
+.delete-post-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Search Overaly */
+.search-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 9000;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(215, 215, 215, 0.911);
+}
+
+.search-overlay-enter {
+  opacity: 0;
+  transform: scale(1.3);
+}
+
+.search-overlay-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: 0.33s visibility ease-in-out, 0.33s opacity ease-in-out, 0.33s transform ease-in-out;
+}
+
+.search-overlay-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.search-overlay-exit-active {
+  opacity: 0;
+  transform: scale(1.3);
+  transition: 0.33s visibility ease-in-out, 0.33s opacity ease-in-out, 0.33s transform ease-in-out;
+}
+
+.search-overlay-icon {
+  color: #007bff;
+  font-size: 1.4rem;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.live-search-field {
+  background-color: transparent;
+  border: none;
+  font-size: 1.1rem;
+  outline: none;
+  flex: 1;
+  color: #007bff;
+}
+
+.live-search-results {
+  opacity: 0;
+  transition: all 0.3s ease-out;
+  transform: scale(1.07);
+}
+
+.live-search-results--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.search-overlay-top {
+  background-color: #fff;
+  /* background-color: rgba(0, 0, 0, .79); */
+}
+
+.search-overlay-top .container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.search-overlay-bottom {
+  overflow: auto;
+}
+
+.close-live-search {
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.75;
+  line-height: 1;
+  color: #292929;
+}
+
+@media (min-width: 700px) {
+  .live-search-field {
+    font-size: 2.5rem;
+  }
+
+  .close-live-search {
+    font-size: 3rem;
+  }
+
+  .search-overlay-icon {
+    font-size: 3rem;
+  }
+}
+
+.close-live-search:hover {
+  opacity: 1;
+}
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.circle-loader {
+  opacity: 0;
+  transition: opacity 0.45s ease-out, visibility 0.45s ease-out;
+  visibility: hidden;
+  position: absolute;
+  left: 50%;
+  box-sizing: border-box;
+  width: 65px;
+  height: 65px;
+  border-radius: 100%;
+  border: 10px solid rgba(73, 80, 87, 0.2);
+  border-top-color: #495057;
+  will-change: -webkit-transform, transform;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear;
+}
+
+.circle-loader--visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* End Search Overlay */
+
+/* Chat */
+.chat-wrapper {
+  position: fixed;
+  z-index: 5;
+  bottom: 0;
+  right: 20px;
+  width: 290px;
+  height: 350px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: 0.33s opacity ease-in-out, 0.33s transform ease-in-out;
+}
+
+.chat-wrapper--is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chat-title-bar {
+  background-color: #292929;
+  color: #fff;
+  padding: 4px 7px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat-title-bar-close {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.chat-title-bar-close:hover {
+  opacity: 1;
+}
+
+.chat-log {
+  padding: 8px;
+  flex: 1;
+  overflow: auto;
+}
+
+.chat-self,
+.chat-other {
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.chat-self {
+  padding-left: 25%;
+}
+
+.chat-self .chat-avatar {
+  margin-left: 6px;
+}
+
+.chat-self .chat-message {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chat-self .chat-message-inner {
+  text-align: right;
+  padding: 4px 7px;
+  border-radius: 12px;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.chat-other {
+  padding-right: 25%;
+}
+
+.chat-other .chat-avatar {
+  margin-right: 6px;
+}
+
+.chat-other .chat-message {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.chat-other .chat-message-inner {
+  padding: 4px 7px;
+  border-radius: 12px;
+  background-color: #f1f0f0;
+}
+
+.chat-message a {
+  color: #212529;
+}
+
+.chat-field {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 7px;
+  border: none;
+  outline: none;
+  font-size: 0.75rem;
+}
+
+.floating-alert {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  -moz-animation: floatingAlert ease-in 5s forwards;
+  -webkit-animation: floatingAlert ease-in 5s forwards;
+  -o-animation: floatingAlert ease-in 5s forwards;
+  animation: floatingAlert ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.floating-alerts .floating-alert:last-of-type {
+  display: block;
+}
+
+@keyframes floatingAlert {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) scale(1.2);
+  }
+
+  9% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+  }
+
+  91% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+@-webkit-keyframes floatingAlert {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) scale(1.2);
+  }
+
+  9% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+  }
+
+  91% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+.small-header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+}
+
+.custom-tooltip {
+  padding: 8px 10px !important;
+}
+
+/* Dots Loading Animation */
+.dots-loading {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dots-loading::before,
+.dots-loading::after {
+  content: " ";
+}
+
+.dots-loading div,
+.dots-loading::before,
+.dots-loading::after {
+  margin: 35px 5px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #c4c4c4;
+  opacity: 0;
+}
+
+.dots-loading::before {
+  -moz-animation: opacitychange 1s ease-in-out infinite;
+  -webkit-animation: opacitychange 1s ease-in-out infinite;
+  -o-animation: opacitychange 1s ease-in-out infinite;
+  animation: opacitychange 1s ease-in-out infinite;
+}
+
+.dots-loading div {
+  -moz-animation: opacitychange 1s ease-in-out 0.33s infinite;
+  -webkit-animation: opacitychange 1s ease-in-out 0.33s infinite;
+  -o-animation: opacitychange 1s ease-in-out 0.33s infinite;
+  animation: opacitychange 1s ease-in-out 0.33s infinite;
+  -webkit-animation-fill-mode: infinite;
+  animation-fill-mode: infinite;
+}
+
+.dots-loading::after {
+  -moz-animation: opacitychange 1s ease-in-out 0.66s infinite;
+  -webkit-animation: opacitychange 1s ease-in-out 0.66s infinite;
+  -o-animation: opacitychange 1s ease-in-out 0.66s infinite;
+  animation: opacitychange 1s ease-in-out 0.66s infinite;
+  -webkit-animation-fill-mode: infinite;
+  animation-fill-mode: infinite;
+}
+
+@keyframes opacitychange {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes opacitychange {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  60% {
+    opacity: 1;
+  }
+}
