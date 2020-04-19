@@ -3,7 +3,7 @@ const Post = require("../models/Post")
 const Follow = require("../models/Follow")
 const jwt = require("jsonwebtoken")
 
-// how many days a token lasts before expiring
+// how long a token lasts before expiring
 const tokenLasts = "365d"
 
 exports.apiGetPostsByUsername = async function (req, res) {
