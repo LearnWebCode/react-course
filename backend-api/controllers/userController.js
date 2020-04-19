@@ -3,7 +3,10 @@ const Post = require("../models/Post")
 const Follow = require("../models/Follow")
 const jwt = require("jsonwebtoken")
 
-exports.apiGetPostsByUsername = async function(req, res) {
+// how many days a token lasts before expiring
+const tokenLasts = "365d"
+
+exports.apiGetPostsByUsername = async function (req, res) {
   try {
     let authorDoc = await User.findByUsername(req.params.username)
     let posts = await Post.findByAuthorId(authorDoc._id)
@@ -14,7 +17,7 @@ exports.apiGetPostsByUsername = async function(req, res) {
   }
 }
 
-exports.checkToken = function(req, res) {
+exports.checkToken = function (req, res) {
   try {
     req.apiUser = jwt.verify(req.body.token, process.env.JWTSECRET)
     res.json(true)
@@ -23,7 +26,7 @@ exports.checkToken = function(req, res) {
   }
 }
 
-exports.apiMustBeLoggedIn = function(req, res, next) {
+exports.apiMustBeLoggedIn = function (req, res, next) {
   try {
     req.apiUser = jwt.verify(req.body.token, process.env.JWTSECRET)
     next()
@@ -32,22 +35,22 @@ exports.apiMustBeLoggedIn = function(req, res, next) {
   }
 }
 
-exports.doesUsernameExist = function(req, res) {
+exports.doesUsernameExist = function (req, res) {
   User.findByUsername(req.body.username.toLowerCase())
-    .then(function() {
+    .then(function () {
       res.json(true)
     })
-    .catch(function() {
+    .catch(function () {
       res.json(false)
     })
 }
 
-exports.doesEmailExist = async function(req, res) {
+exports.doesEmailExist = async function (req, res) {
   let emailBool = await User.doesEmailExist(req.body.email)
   res.json(emailBool)
 }
 
-exports.sharedProfileData = async function(req, res, next) {
+exports.sharedProfileData = async function (req, res, next) {
   let viewerId
   try {
     viewer = jwt.verify(req.body.token, process.env.JWTSECRET)
@@ -69,39 +72,39 @@ exports.sharedProfileData = async function(req, res, next) {
   next()
 }
 
-exports.apiLogin = function(req, res) {
+exports.apiLogin = function (req, res) {
   let user = new User(req.body)
   user
     .login()
-    .then(function(result) {
+    .then(function (result) {
       res.json({
-        token: jwt.sign({ _id: user.data._id, username: user.data.username, avatar: user.avatar }, process.env.JWTSECRET, { expiresIn: "7d" }),
+        token: jwt.sign({ _id: user.data._id, username: user.data.username, avatar: user.avatar }, process.env.JWTSECRET, { expiresIn: tokenLasts }),
         username: user.data.username,
-        avatar: user.avatar
+        avatar: user.avatar,
       })
     })
-    .catch(function(e) {
+    .catch(function (e) {
       res.json(false)
     })
 }
 
-exports.apiRegister = function(req, res) {
+exports.apiRegister = function (req, res) {
   let user = new User(req.body)
   user
     .register()
     .then(() => {
       res.json({
-        token: jwt.sign({ _id: user.data._id, username: user.data.username, avatar: user.avatar }, process.env.JWTSECRET, { expiresIn: "7d" }),
+        token: jwt.sign({ _id: user.data._id, username: user.data.username, avatar: user.avatar }, process.env.JWTSECRET, { expiresIn: tokenLasts }),
         username: user.data.username,
-        avatar: user.avatar
+        avatar: user.avatar,
       })
     })
-    .catch(regErrors => {
+    .catch((regErrors) => {
       res.status(500).send("Error")
     })
 }
 
-exports.apiGetHomeFeed = async function(req, res) {
+exports.apiGetHomeFeed = async function (req, res) {
   try {
     let posts = await Post.getFeed(req.apiUser._id)
     res.json(posts)
@@ -110,27 +113,27 @@ exports.apiGetHomeFeed = async function(req, res) {
   }
 }
 
-exports.ifUserExists = function(req, res, next) {
+exports.ifUserExists = function (req, res, next) {
   User.findByUsername(req.params.username)
-    .then(function(userDocument) {
+    .then(function (userDocument) {
       req.profileUser = userDocument
       next()
     })
-    .catch(function() {
+    .catch(function () {
       res.json(false)
     })
 }
 
-exports.profileBasicData = function(req, res) {
+exports.profileBasicData = function (req, res) {
   res.json({
     profileUsername: req.profileUser.username,
     profileAvatar: req.profileUser.avatar,
     isFollowing: req.isFollowing,
-    counts: { postCount: req.postCount, followerCount: req.followerCount, followingCount: req.followingCount }
+    counts: { postCount: req.postCount, followerCount: req.followerCount, followingCount: req.followingCount },
   })
 }
 
-exports.profileFollowers = async function(req, res) {
+exports.profileFollowers = async function (req, res) {
   try {
     let followers = await Follow.getFollowersById(req.profileUser._id)
     //res.header("Cache-Control", "max-age=10").json(followers)
@@ -140,7 +143,7 @@ exports.profileFollowers = async function(req, res) {
   }
 }
 
-exports.profileFollowing = async function(req, res) {
+exports.profileFollowing = async function (req, res) {
   try {
     let following = await Follow.getFollowingById(req.profileUser._id)
     //res.header("Cache-Control", "max-age=10").json(following)
