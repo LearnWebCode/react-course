@@ -8,6 +8,7 @@ module.exports = {
     filename: "bundled.js"
   },
   mode: "development",
+  devtool: "source-map",
   devServer: {
     port: 3000,
     contentBase: path.join(__dirname, "app"),

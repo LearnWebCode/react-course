@@ -60,6 +60,7 @@ config = {
 }
 
 if (currentTask == "webpackDev" || currentTask == "dev") {
+  config.devtool = "source-map"
   config.devServer = {
     port: 3000,
     contentBase: path.join(__dirname, "app"),
