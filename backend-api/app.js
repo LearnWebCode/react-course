@@ -18,7 +18,7 @@ io.on("connection", function(socket) {
     try {
       let user = jwt.verify(data.token, process.env.JWTSECRET)
       socket.broadcast.emit("chatFromServer", { message: sanitizeHTML(data.message, { allowedTags: [], allowedAttributes: {} }), username: user.username, avatar: user.avatar })
-    } catch {
+    } catch (e) {
       console.log("Not a valid token for chat.")
     }
   })

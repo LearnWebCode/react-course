@@ -25,7 +25,7 @@ exports.apiUpdate = function(req, res) {
         res.json("failure")
       }
     })
-    .catch(() => {
+    .catch(e => {
       // a post with the requested id doesn't exist
       // or if the current visitor is not the owner of the requested post
       res.json("no permissions")
@@ -37,7 +37,7 @@ exports.apiDelete = function(req, res) {
     .then(() => {
       res.json("Success")
     })
-    .catch(() => {
+    .catch(e => {
       res.json("You do not have permission to perform that action.")
     })
 }
@@ -47,7 +47,7 @@ exports.search = function(req, res) {
     .then(posts => {
       res.json(posts)
     })
-    .catch(() => {
+    .catch(e => {
       res.json([])
     })
 }
@@ -56,7 +56,7 @@ exports.reactApiViewSingle = async function(req, res) {
   try {
     let post = await Post.findSingleById(req.params.id, 0)
     res.json(post)
-  } catch {
+  } catch (e) {
     res.json(false)
   }
 }

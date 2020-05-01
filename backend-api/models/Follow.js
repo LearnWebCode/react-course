@@ -86,7 +86,7 @@ Follow.getFollowersById = function(id) {
         return {username: follower.username, avatar: user.avatar}
       })
       resolve(followers)
-    } catch {
+    } catch (e) {
       reject()
     }
   })
@@ -108,7 +108,7 @@ Follow.getFollowingById = function(id) {
         return {username: follower.username, avatar: user.avatar}
       })
       resolve(followers)
-    } catch {
+    } catch (e) {
       reject()
     }
   })

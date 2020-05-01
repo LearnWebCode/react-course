@@ -37,7 +37,7 @@ Post.prototype.create = function() {
       // save post into database
       postsCollection.insertOne(this.data).then((info) => {
         resolve(info.ops[0]._id)
-      }).catch(() => {
+      }).catch(e => {
         this.errors.push("Please try again later.")
         reject(this.errors)
       })
@@ -58,7 +58,7 @@ Post.prototype.update = function() {
       } else {
         reject()
       }
-    } catch {
+    } catch (e) {
       reject()
     }
   })
@@ -145,7 +145,7 @@ Post.delete = function(postIdToDelete, currentUserId) {
       } else {
         reject()
       }    
-    } catch {
+    } catch (e) {
       reject()
     }
   })

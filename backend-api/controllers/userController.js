@@ -12,7 +12,7 @@ exports.apiGetPostsByUsername = async function (req, res) {
     let posts = await Post.findByAuthorId(authorDoc._id)
     //res.header("Cache-Control", "max-age=10").json(posts)
     res.json(posts)
-  } catch {
+  } catch (e) {
     res.status(500).send("Sorry, invalid user requested.")
   }
 }
@@ -21,7 +21,7 @@ exports.checkToken = function (req, res) {
   try {
     req.apiUser = jwt.verify(req.body.token, process.env.JWTSECRET)
     res.json(true)
-  } catch {
+  } catch (e) {
     res.json(false)
   }
 }
@@ -30,7 +30,7 @@ exports.apiMustBeLoggedIn = function (req, res, next) {
   try {
     req.apiUser = jwt.verify(req.body.token, process.env.JWTSECRET)
     next()
-  } catch {
+  } catch (e) {
     res.status(500).send("Sorry, you must provide a valid token.")
   }
 }
@@ -40,7 +40,7 @@ exports.doesUsernameExist = function (req, res) {
     .then(function () {
       res.json(true)
     })
-    .catch(function () {
+    .catch(function (e) {
       res.json(false)
     })
 }
@@ -55,7 +55,7 @@ exports.sharedProfileData = async function (req, res, next) {
   try {
     viewer = jwt.verify(req.body.token, process.env.JWTSECRET)
     viewerId = viewer._id
-  } catch {
+  } catch (e) {
     viewerId = 0
   }
   req.isFollowing = await Follow.isVisitorFollowing(req.profileUser._id, viewerId)
@@ -108,7 +108,7 @@ exports.apiGetHomeFeed = async function (req, res) {
   try {
     let posts = await Post.getFeed(req.apiUser._id)
     res.json(posts)
-  } catch {
+  } catch (e) {
     res.status(500).send("Error")
   }
 }
@@ -119,7 +119,7 @@ exports.ifUserExists = function (req, res, next) {
       req.profileUser = userDocument
       next()
     })
-    .catch(function () {
+    .catch(function (e) {
       res.json(false)
     })
 }
@@ -138,7 +138,7 @@ exports.profileFollowers = async function (req, res) {
     let followers = await Follow.getFollowersById(req.profileUser._id)
     //res.header("Cache-Control", "max-age=10").json(followers)
     res.json(followers)
-  } catch {
+  } catch (e) {
     res.status(500).send("Error")
   }
 }
@@ -148,7 +148,7 @@ exports.profileFollowing = async function (req, res) {
     let following = await Follow.getFollowingById(req.profileUser._id)
     //res.header("Cache-Control", "max-age=10").json(following)
     res.json(following)
-  } catch {
+  } catch (e) {
     res.status(500).send("Error")
   }
 }

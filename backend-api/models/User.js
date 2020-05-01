@@ -60,7 +60,7 @@ User.prototype.login = function() {
       } else {
         reject("Invalid username / password.")
       }
-    }).catch(function() {
+    }).catch(function(e) {
       reject("Please try again later.")
     })
   })
@@ -109,7 +109,7 @@ User.findByUsername = function(username) {
       } else {
         reject()
       }
-    }).catch(function() {
+    }).catch(function(e) {
       reject()
     })
   })
