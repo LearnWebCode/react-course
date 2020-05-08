@@ -12,7 +12,8 @@ module.exports = {
   devServer: {
     port: 3000,
     contentBase: path.join(__dirname, "app"),
-    hot: true
+    hot: true,
+    historyApiFallback: { index: "index.html" }
   },
   module: {
     rules: [
