@@ -80,7 +80,7 @@ exports.apiLogin = function (req, res) {
       res.json({
         token: jwt.sign({ _id: user.data._id, username: user.data.username, avatar: user.avatar }, process.env.JWTSECRET, { expiresIn: tokenLasts }),
         username: user.data.username,
-        avatar: user.avatar,
+        avatar: user.avatar
       })
     })
     .catch(function (e) {
@@ -96,11 +96,11 @@ exports.apiRegister = function (req, res) {
       res.json({
         token: jwt.sign({ _id: user.data._id, username: user.data.username, avatar: user.avatar }, process.env.JWTSECRET, { expiresIn: tokenLasts }),
         username: user.data.username,
-        avatar: user.avatar,
+        avatar: user.avatar
       })
     })
-    .catch((regErrors) => {
-      res.status(500).send("Error")
+    .catch(regErrors => {
+      res.status(500).send(regErrors)
     })
 }
 
@@ -129,7 +129,7 @@ exports.profileBasicData = function (req, res) {
     profileUsername: req.profileUser.username,
     profileAvatar: req.profileUser.avatar,
     isFollowing: req.isFollowing,
-    counts: { postCount: req.postCount, followerCount: req.followerCount, followingCount: req.followingCount },
+    counts: { postCount: req.postCount, followerCount: req.followerCount, followingCount: req.followingCount }
   })
 }
 
