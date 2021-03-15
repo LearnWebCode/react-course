@@ -4,6 +4,8 @@ const ObjectID = require('mongodb').ObjectID
 const User = require('./User')
 const sanitizeHTML = require('sanitize-html')
 
+postsCollection.createIndex({title: "text", body: "text"})
+
 let Post = function(data, userid, requestedPostId) {
   this.data = data
   this.errors = []
