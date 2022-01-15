@@ -4,7 +4,7 @@ import fs from "fs"
 import Footer from "./app/components/Footer"
 import Header from "./app/components/Header"
 import LoadingDotsIcon from "./app/components/LoadingDotsIcon"
-import { StaticRouter as Router } from "react-router-dom"
+import { StaticRouter as Router } from "react-router-dom/server"
 import StateContext from "./app/StateContext"
 
 function Shell() {
