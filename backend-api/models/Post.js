@@ -1,6 +1,6 @@
 const postsCollection = require("../db").db().collection("posts")
 const followsCollection = require("../db").db().collection("follows")
-const ObjectID = require("mongodb").ObjectID
+const ObjectID = require("mongodb").ObjectId
 const User = require("./User")
 const sanitizeHTML = require("sanitize-html")
 
